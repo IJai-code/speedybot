@@ -1,57 +1,45 @@
 # SpeedyBot
 
-SpeedyBot is a Slack bot built with Node.js and Slack Bolt. It provides useful slash commands inside Slack, including bot status checks, API powered responses, and simple utility features.
-
-This project was created as part of Hack Club Stardance.
+SpeedyBot is a Slack bot built with Node.js and Slack Bolt. It provides useful slash commands, responds with API-powered information, and runs continuously on a Nest server.
 
 ## Features
 
-SpeedyBot currently supports:
+* Check bot latency with `/speedybot-ping`
+* View available commands with `/speedybot-help`
+* Get a random cat fact with `/speedybot-catfact`
+* Get a random joke with `/speedybot-joke`
+* Hosted on Nest and configured to run 24/7 using systemd
 
-### `/speedybot-ping`
-
-Checks whether the bot is online and returns the response latency.
-
-### `/speedybot-help`
-
-Shows a list of available commands.
-
-### `/speedybot-catfact`
-
-Fetches a random cat fact using an external API.
-
-### `/speedybot-joke`
-
-Fetches a random joke using an external API.
-
-## How It Works
-
-SpeedyBot uses Slack slash commands to receive user requests. When a command is used, Slack sends the request to the bot. The bot processes it, optionally communicates with an API, and sends a response back into Slack.
-
-The bot runs continuously on a Nest server using a systemd service, allowing it to stay online even when I am not actively running it.
-
-## Technologies Used
+## Tech Stack
 
 * Node.js
-* Slack Bolt
 * JavaScript
+* Slack Bolt
 * Axios
 * Slack API
-* Nest server hosting
+* Nest
 
-## Setup
+## Project Structure
 
-To run SpeedyBot locally:
+```text
+speedybot/
+├── index.js
+├── package.json
+├── package-lock.json
+├── .env
+└── README.md
+```
+
+## Running Locally
 
 1. Clone the repository.
-
 2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Create a `.env` file with your Slack tokens:
+3. Create a `.env` file:
 
 ```env
 SLACK_BOT_TOKEN=your_bot_token
@@ -66,20 +54,24 @@ node index.js
 
 ## Deployment
 
-SpeedyBot is deployed on Nest and runs as a systemd service. This keeps the bot running continuously and automatically restarts it if needed.
+The bot is deployed on a Nest server and managed with a systemd service so it automatically starts after a reboot and restarts if it stops unexpectedly.
 
-## AI Usage
-None
+## Commands
+
+| Command              | Description                                     |
+| -------------------- | ----------------------------------------------- |
+| `/speedybot-ping`    | Returns the bot's response latency.             |
+| `/speedybot-help`    | Lists all available commands.                   |
+| `/speedybot-catfact` | Fetches a random cat fact from an external API. |
+| `/speedybot-joke`    | Fetches a random joke from an external API.     |
 
 ## Future Improvements
 
-Some ideas for future versions:
-
-* Add more useful Slack commands
-* Add custom integrations
+* Add more API-powered commands
+* Support interactive Slack features
 * Improve error handling
-* Add more interactive Slack features
+* Organize commands into separate files
 
-## Author
+## AI Usage
 
-Built by Ishaan Jha
+AI was used to help understand documentation, troubleshoot errors, and explain concepts during development. The implementation, testing, deployment, and customization of the project were completed by me.
