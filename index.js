@@ -9,12 +9,13 @@ const app = new App({
   socketMode: true
 });
 
-app.command("/speedybot-ping", async ({ command, ack, respond }) => {
+app.command("/speedybot-ping", async ({ ack, respond }) => {
   const start = Date.now();
   await ack();
   const latency = Date.now() - start;
   await respond({ text: `Pong!\nLatency: ${latency}ms` });
 });
+
 app.command("/speedybot-help", async ({ ack, respond }) => {
   await ack();
   await respond({
@@ -22,7 +23,8 @@ app.command("/speedybot-help", async ({ ack, respond }) => {
 `Available Commands:
 /speedybot-ping - Check bot latency
 /speedybot-catfact - Get a cat fact
-/speedybot-joke - Get a random joke`
+/speedybot-joke - Get a random joke
+/speedybot-advice - Get a random piece of advice`
   });
 });
 
@@ -55,7 +57,25 @@ ${response.data.punchline}`
   }
 });
 
+app.command("/speedybot-advice", async ({ ack, respond }) => {
+  await ack();
+
+  try {
+    const response = await axios.get("https://api.adviceslip.com/advice");
+    await respond({
+      text: `Advice:\n${response.data.slip.advice}`
+    });
+  } catch (err) {
+    console.log(err);
+    await respond({ text: "Failed to fetch advice." });
+  }
+});
+
 (async () => {
-  await app.start();
-  console.log("bot is running!");
+  try {
+    await app.start();
+    console.log("bot is running!");
+  } catch (error) {
+    console.error(error);
+  }
 })();
