@@ -72,6 +72,3 @@ The bot is deployed on a Nest server and managed with a systemd service so it au
 * Improve error handling
 * Organize commands into separate files
 
-## AI Usage
-
-AI was used to help understand documentation, troubleshoot errors, and explain concepts during development. The implementation, testing, deployment, and customization of the project were completed by me.
